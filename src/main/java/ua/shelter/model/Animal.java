@@ -1,6 +1,5 @@
 import ua.common.BaseEntity;
 import ua.shelter.util.ShelterUtils;
-
 import java.time.LocalDate;
 
 public class Animal extends BaseEntity {

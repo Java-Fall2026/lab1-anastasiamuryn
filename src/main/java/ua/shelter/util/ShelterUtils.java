@@ -14,17 +14,17 @@ public final class ShelterUtils {
 
          public static void validateAnimal(Object obj) {
                   String message = "Animal must be not blank, got: " + obj;
-                  FormatHelper.requireNotNull(obj, message);
+                  ValidationHelper.requireNotNull(obj, message);
          }
 
          public static void validateKeeper(Object obj) {
                   String message = "Keeper must be not blank, got: " + obj;
-                  FormatHelper.requireNotNull(obj, message);
+                  ValidationHelper.requireNotNull(obj, message);
          }
 
-         public static void validateSpecies(String value) {
-                  String message = " Species must be not blank, got: " + value;
-                  FormatHelper.requireNotNull(value, message);
+         public static void validateSpecies(Object obj) {
+                  String message = " Species must be not blank, got: " + obj;
+                  ValidationHelper.requireNotNull(obj, message);
          }
 
          public static String validateAndNormalizeChipNumber(String value) {
@@ -54,7 +54,7 @@ public final class ShelterUtils {
 
          public static String dietIsAllow(String value) {
                   String message = " Diet must be not blank, got: " + value;
-                  String upperValue = FormatHelper.normalize(value);
+                  String upperValue = FormatHelper.normalize(value, message);
                   String message2 = "Diet must be CARNIVORE or HERBIVORE or OMNIVORE, got: " + value;
                   ValidationHelper.requireAllowValues(upperValue, ALLOWED_DIETS, message2);
                   return upperValue;
@@ -63,7 +63,7 @@ public final class ShelterUtils {
          public static String healthIsAllow(String value) {
                   String message = " Health must be not blank, got: " + value;
                   String message2 = " Health must be HEALTHY or UNDER_TREATMENT or QUARANTINE, got: " + value;
-                  String upperValue = FormatHelper.normalize(value);
+                  String upperValue = FormatHelper.normalize(value, message);
                   ValidationHelper.requireAllowValues(upperValue, ALLOWED_HEALTH, message2);
                   return upperValue;
                   ;

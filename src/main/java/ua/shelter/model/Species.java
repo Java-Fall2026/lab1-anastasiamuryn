@@ -8,7 +8,8 @@ public class Species extends BaseEntity {
 
          public Species(String speciesCode, String commonName, String diet) {
                   super();
-                  this.speciesCode = ShelterUtils.validateAndNormalizeSpeciesCode(speciesCode);
+                  ShelterUtils.validateSpecies(speciesCode);
+                  this.speciesCode = speciesCode;
                   this.commonName = ShelterUtils.validateAndCapitalizeCommonName(commonName);
                   this.diet = ShelterUtils.dietIsAllow(diet);
          }

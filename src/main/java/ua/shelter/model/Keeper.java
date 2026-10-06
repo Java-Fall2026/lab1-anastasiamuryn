@@ -1,5 +1,6 @@
 import ua.common.BaseEntity;
 import ua.shelter.util.ShelterUtils;
+import java.time.LocalDate;
 
 public class Keeper extends BaseEntity {
          private String employeeBadge;

@@ -1,4 +1,5 @@
 import ua.common.BaseEntity;
+import java.time.LocalDate;
 import ua.shelter.util.ShelterUtils;
 
 public class CareSchedule extends BaseEntity {
@@ -20,7 +21,7 @@ public class CareSchedule extends BaseEntity {
                   this.animal = animal;
                   ShelterUtils.validateKeeper(keeper);
                   this.keeper = keeper;
-                  ShelterUtils.validateStartDate(startDate, animal.getBirthDate(), keeper.getHireDate);
+                  ShelterUtils.validateStartDate(startDate, animal.getBirthDate(), keeper. getHireDate());
                   this.startDate = startDate;
                   setEndDate(endDate);
                   setFeedingsPerDay(feedingsPerDay);

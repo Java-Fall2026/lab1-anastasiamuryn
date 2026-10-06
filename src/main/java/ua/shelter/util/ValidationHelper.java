@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Set;
 
 final class ValidationHelper {
 
@@ -11,7 +12,7 @@ final class ValidationHelper {
                   }
          }
 
-         public static void requireNotBlanck(String val, String message) {
+         public static void requireNotBlank(String val, String message) {
                   if (val == null || val.trim().isBlank()) {
                            throw new NullPointerException(message);
                   }
