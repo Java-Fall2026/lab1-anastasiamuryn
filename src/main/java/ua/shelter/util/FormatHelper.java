@@ -1,3 +1,4 @@
+package ua.shelter.util;
 final class FormatHelper {
          private FormatHelper() {
          }

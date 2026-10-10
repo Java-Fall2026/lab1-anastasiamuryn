@@ -1,9 +1,9 @@
+package ua.shelter.util;
 import ua.shelter.model.CareSchedule;
 import ua.shelter.model.Animal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Set;
-import ua.shelter.model.Keeper;
 
 public final class ShelterUtils {
          private static final Set<String> ALLOWED_DIETS = Set.of("CARNIVORE", "HERBIVORE", "OMNIVORE");
@@ -102,7 +102,7 @@ public final class ShelterUtils {
                   String message1 = "Birh date must be not null, got: " + animal.getBirthDate();
                   String message = "Animal must be not null";
                   ValidationHelper.requireNotNull(animal, message);
-                  ValidationHelper.requireNotNull(animal.getBirthDate(), message);
+                  ValidationHelper.requireNotNull(animal.getBirthDate(), message1);
                   return ChronoUnit.MONTHS.between(animal.getBirthDate(), LocalDate.now());
          }
 

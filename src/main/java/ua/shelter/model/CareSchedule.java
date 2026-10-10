@@ -1,3 +1,4 @@
+package ua.shelter.model;
 import ua.common.BaseEntity;
 import java.time.LocalDate;
 import ua.shelter.util.ShelterUtils;
