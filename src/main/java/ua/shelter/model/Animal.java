@@ -1,5 +1,6 @@
 package ua.shelter.model;
 import ua.common.BaseEntity;
+import java.util.Objects;
 import ua.shelter.util.ShelterUtils;
 import java.time.LocalDate;
 
@@ -49,4 +50,33 @@ public class Animal extends BaseEntity {
          public final void setHealth(String health) {
                   this.health = ShelterUtils.healthIsAllow(health);
          }
+
+         @Override
+         public boolean equals(Object o){
+                  if(this==o){
+                           return true;
+                  }
+                  if(o==null || getClass()!=o.getClass()){
+                           return false;
+                  }
+                  Animal animal = (Animal)o;
+                  return Objects.equals(chipNumber, animal.chipNumber);
+         }
+
+         @Override
+         public int hashCode(){
+                  return Objects.hash(chipNumber);
+         }
+
+         @Override
+         public String toString(){
+                  return "Animal{" + 
+                  "chipNumber : " + chipNumber + '\'' +
+                  ", nickname: " + nickname + '\'' +
+                  ", species : " + species + '\'' +
+                  ", birthDate : " + birthDate + '\'' +
+                  ", health : " + health + '\'' +
+                  '}';
+         }
+
 }

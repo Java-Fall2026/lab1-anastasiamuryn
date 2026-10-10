@@ -1,5 +1,6 @@
 package ua.shelter.model;
 import ua.common.BaseEntity;
+import java.util.Objects;
 import java.time.LocalDate;
 import ua.shelter.util.ShelterUtils;
 
@@ -15,7 +16,7 @@ public class CareSchedule extends BaseEntity {
                   return new CareSchedule(animal, keeper, startDate, endDAte, feedingsPerDay);
          }
 
-         private CareSchedule(Animal animal, Keeper keeper, LocalDate startDate, LocalDate endDate,
+         public CareSchedule(Animal animal, Keeper keeper, LocalDate startDate, LocalDate endDate,
                            int feedingsPerDay) {
                   super();
                   ShelterUtils.validateAnimal(animal);
@@ -56,5 +57,33 @@ public class CareSchedule extends BaseEntity {
          public final void setFeedingsPerDay(int feedingsPerDay) {
                   ShelterUtils.validateFeedings(feedingsPerDay);
                   this.feedingsPerDay = feedingsPerDay;
+         }
+
+         @Override
+         public boolean equals(Object o){
+                  if(this==o){
+                           return true;
+                  }
+                  if(o==null || getClass()!=o.getClass()){
+                           return false;
+                  }
+                  CareSchedule schedule = (CareSchedule)o;
+                  return Objects.equals(animal, schedule.animal) && Objects.equals(startDate, schedule.startDate);
+         }
+
+         @Override
+         public int hashCode(){
+                  return Objects.hash(animal, startDate);
+         }
+
+         @Override
+         public String toString(){
+                  return "CareSchedule{" + 
+                  "animal : " + animal + '\'' +
+                  ", keeper : " + keeper + '\'' +
+                  ", startDate : " + startDate + '\'' +
+                  ", endDate : " + endDate + '\'' +
+                  ", feedingsPerDay : " + feedingsPerDay + '\'' +
+                  '}';
          }
 }

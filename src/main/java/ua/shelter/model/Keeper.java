@@ -1,5 +1,6 @@
 package ua.shelter.model;
 import ua.common.BaseEntity;
+import java.util.Objects;
 import ua.shelter.util.ShelterUtils;
 import java.time.LocalDate;
 
@@ -26,6 +27,32 @@ public class Keeper extends BaseEntity {
 
          public LocalDate getHireDate() {
                   return hireDate;
+         }
+
+         @Override
+         public boolean equals(Object o){
+                  if(this==o){
+                           return true;
+                  }
+                  if(o==null || getClass()!=o.getClass()){
+                           return false;
+                  }
+                  Keeper keeper = (Keeper)o;
+                  return Objects.equals(employeeBadge, keeper.employeeBadge);
+         }
+
+         @Override
+         public int hashCode(){
+                  return Objects.hash(employeeBadge);
+         }
+
+         @Override
+         public String toString(){
+                  return "Keeper{" + 
+                  "employeeBadge: " + employeeBadge + '\'' +
+                  ", fullName: " + fullName + '\'' +
+                  ", hireDate: " + hireDate + '\'' +
+                  '}';
          }
 
 }

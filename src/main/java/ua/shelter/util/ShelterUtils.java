@@ -2,6 +2,7 @@ package ua.shelter.util;
 import ua.shelter.model.CareSchedule;
 import ua.shelter.model.Animal;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.time.temporal.ChronoUnit;
 import java.util.Set;
 
@@ -66,7 +67,6 @@ public final class ShelterUtils {
                   String upperValue = FormatHelper.normalize(value, message);
                   ValidationHelper.requireAllowValues(upperValue, ALLOWED_HEALTH, message2);
                   return upperValue;
-                  ;
          }
 
          public static void validateBirtheDate(LocalDate date) {
