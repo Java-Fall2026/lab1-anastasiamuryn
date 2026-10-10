@@ -11,7 +11,7 @@
 -скріншоти помилок з термінала
 -чому не можу запушити проект, що уе за помилка 403
 -як форматувати валюту
--підкажи як задавати перелік сутностей enum для валідації String diet — CARNIVORE, HERBIVORE, OMNIVORE. String health ✎ — HEALTHY, UNDER_TREATMENT, QUARANTINE
+-підкажи як задавати перелік сутностей enum для валідації String diet — CARNIVORE, HERBIVORE, OMNIVORE. String health HEALTHY, UNDER_TREATMENT, QUARANTINE
 
 **Що AI зробив неправильно або не так, як вимагає завдання, і як ви це помітили:**
 Ще вкінці, коли тести не проходили попросила AI вказати мої помилки, він помітив описки, але не знайшов 1 важливий момент - відсутність імпорту класу java.util.Objects
