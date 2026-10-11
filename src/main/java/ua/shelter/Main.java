@@ -8,11 +8,11 @@ import java.time.LocalDate;
 
 public class Main{
          public static void main(String[] args){
-                  Species species= new Species("TYTYG5gg", "dog", "CARNIVORE"); 
+                  Species species= new Species("TYTYG5gg", "dog", DietStatus.CARNIVORE); 
                   System.out.println("Species: " + species);
                   Keeper keeper = new Keeper("Gor", "Gor Ruber", LocalDate.of(2010, 7, 23));
                   System.out.println("Keeper: " + keeper);
-                  Animal animal= Animal.of("DFV46FH", "Bob", species , LocalDate.of(2016, 5, 23), "HEALTHY");
+                  Animal animal= Animal.of("DFV46FH", "Bob", species , LocalDate.of(2016, 5, 23), HealthStatus.HEALTHY);
                   System.out.println("Animal: " + animal);
                   CareSchedule schedule = CareSchedule.of(animal, keeper, LocalDate.of(2018, 5, 23), null, 3);
                   System.out.println("CareSchedule: " + schedule);
@@ -20,10 +20,15 @@ public class Main{
                   String normalizedChip = ShelterUtils.validateAndNormalizeChipNumber(rawChip);
                   System.out.println("Raw: '" + rawChip + "' -> Normalized: '" + normalizedChip + "'");
 
-                  try{
-                  ShelterUtils.dietIsAllow("PIZZA");
+                  System.out.println("Доступні типи харчування:");
+                  for (DietStatus d : DietStatus.values()) {
+                  System.out.println("- " + d + " (значення: " + d.getDiet() + ")");
+                  }
+
+                  try {
+                           DietStatus wrongDiet = DietStatus.valueOf("UNKNOWN_DIET");
                   } catch (IllegalArgumentException e) {
-                           System.out.println("Caught expected error: " + e.getMessage());
+                           System.out.println("Caught expected enum valueOf error: " + e.getMessage());
                   }
          
                   try {
@@ -38,14 +43,17 @@ public class Main{
                            System.out.println("Caught expected error: " + e.getMessage());
                   }
 
+                  System.out.println("Опис здоров'я тварини: " + ShelterUtils.getHealthDescription(animal.getHealth()));
+                  System.out.println("Опис дієти виду: " + ShelterUtils.getDietDescription(species.diet()));
+
                   try {
-                           animal.setHealth("INVALID_HEALTH");
+                           Species badSpecies = new Species("", "", DietStatus.CARNIVORE);
                   } catch (IllegalArgumentException e) {
-                           System.out.println("Setter protection triggered: " + e.getMessage());
+                  System.out.println("Record validation caught expected error: " + e.getMessage());
                   }
 
-                  Animal animalTwin = Animal.of("DFV46FH", "Bob", species, LocalDate.of(2016, 5, 23), "HEALTHY");
-                  Animal animalDifferent = Animal.of("DFV99999", "Max", species, LocalDate.of(2020, 1, 1), "HEALTHY");
+                  Animal animalTwin = Animal.of("DFV46FH", "Bob", species, LocalDate.of(2016, 5, 23), HealthStatus.HEALTHY);
+                  Animal animalDifferent = Animal.of("DFV99999", "Max", species, LocalDate.of(2020, 1, 1), HealthStatus.HEALTHY);
 
                   System.out.println("animal == animalTwin: " + (animal == animalTwin)); 
                   System.out.println("animal.equals(animalTwin): " + animal.equals(animalTwin)); 
@@ -53,11 +61,12 @@ public class Main{
                   System.out.println("animal.equals(animalDifferent): " + animal.equals(animalDifferent)); 
 
                   long ageMonths = ShelterUtils.animalAgeMonths(animal);
-                  System.out.println("Animal age in months: " + ageMonths);
+                  System.out.println("Вік тварини в місяцях: " + ageMonths);
 
                   long careDays = ShelterUtils.careDays(schedule);
-                  System.out.println("Care active days: " + careDays);
+                  System.out.println("Кількість днів догляду: " + careDays);
 
+        
                   System.out.println(species);
                   System.out.println(keeper);
                   System.out.println(animal);

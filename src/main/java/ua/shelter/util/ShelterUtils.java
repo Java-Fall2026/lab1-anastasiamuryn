@@ -7,9 +7,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.Set;
 
 public final class ShelterUtils {
-         private static final Set<String> ALLOWED_DIETS = Set.of("CARNIVORE", "HERBIVORE", "OMNIVORE");
-         private static final Set<String> ALLOWED_HEALTH = Set.of("HEALTHY", "UNDER_TREATMENT", "QUARANTINE");
-
          private ShelterUtils() {
          }
 
@@ -51,22 +48,6 @@ public final class ShelterUtils {
          public static String validateAndCapitalizeNickName(String value) {
                   String message = "Nick name must be not blank, got: " + value;
                   return FormatHelper.capitalize(value, message);
-         }
-
-         public static String dietIsAllow(String value) {
-                  String message = " Diet must be not blank, got: " + value;
-                  String upperValue = FormatHelper.normalize(value, message);
-                  String message2 = "Diet must be CARNIVORE or HERBIVORE or OMNIVORE, got: " + value;
-                  ValidationHelper.requireAllowValues(upperValue, ALLOWED_DIETS, message2);
-                  return upperValue;
-         }
-
-         public static String healthIsAllow(String value) {
-                  String message = " Health must be not blank, got: " + value;
-                  String message2 = " Health must be HEALTHY or UNDER_TREATMENT or QUARANTINE, got: " + value;
-                  String upperValue = FormatHelper.normalize(value, message);
-                  ValidationHelper.requireAllowValues(upperValue, ALLOWED_HEALTH, message2);
-                  return upperValue;
          }
 
          public static void validateBirtheDate(LocalDate date) {
@@ -114,5 +95,21 @@ public final class ShelterUtils {
                            return -1;
                   }
                   return ChronoUnit.DAYS.between(schedule.getStartDate(), schedule.getEndDate());
+         }
+
+         public static String getHealthDescription(HealthStatus health) {
+                  return switch(health){
+                           case HEALTHY -> "Тварина здорова";
+                           case UNDER_TREATMENT -> "Тварина на лікувані";
+                           case QUARANTINE -> "Тварина на карантині";
+                  };
+         }
+
+         public static String getDietDescription(DietStatus diet) {
+                  return switch(diet){
+                           case CARNIVORE -> "Тварина є хижаком";
+                           case HERBIVORE -> "Тварина є травоїдною";
+                           case OMNIVORE -> "Тварина є всеїдною";
+                  };
          }
 }

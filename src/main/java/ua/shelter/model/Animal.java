@@ -4,12 +4,14 @@ import java.util.Objects;
 import ua.shelter.util.ShelterUtils;
 import java.time.LocalDate;
 
+
+
 public class Animal extends BaseEntity {
          private String chipNumber;
          private String nickname;
          private Species species;
          private LocalDate birthDate;
-         private String health;
+         HealthStatus helth;
 
          public static Animal of(String chipNumber, String nickname, Species species, LocalDate birthDate,
                            String health) {
