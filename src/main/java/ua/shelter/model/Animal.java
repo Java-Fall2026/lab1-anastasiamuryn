@@ -3,6 +3,7 @@ import ua.common.BaseEntity;
 import java.util.Objects;
 import ua.shelter.util.ShelterUtils;
 import java.time.LocalDate;
+import ua.shelter.model.HealthStatus;
 
 
 
@@ -11,14 +12,14 @@ public class Animal extends BaseEntity {
          private String nickname;
          private Species species;
          private LocalDate birthDate;
-         HealthStatus helth;
+         private HealthStatus health;
 
          public static Animal of(String chipNumber, String nickname, Species species, LocalDate birthDate,
-                           String health) {
+                           HealthStatus health) {
                   return new Animal(chipNumber, nickname, species, birthDate, health);
          }
 
-         private Animal(String chipNumber, String nickname, Species species, LocalDate birthDate, String health) {
+         private Animal(String chipNumber, String nickname, Species species, LocalDate birthDate, HealthStatus health) {
                   super();
                   this.chipNumber = ShelterUtils.validateAndNormalizeChipNumber(chipNumber);
                   this.nickname = ShelterUtils.validateAndCapitalizeNickName(nickname);
@@ -45,12 +46,13 @@ public class Animal extends BaseEntity {
                   return birthDate;
          }
 
-         public String getHealth() {
+         public HealthStatus getHealth() {
                   return health;
          }
 
-         public final void setHealth(String health) {
-                  this.health = ShelterUtils.healthIsAllow(health);
+         public final void setHealth(HealthStatus health) {
+                  ShelterUtils.validateAnimalHealth(health);
+                  this.health = health;
          }
 
          @Override

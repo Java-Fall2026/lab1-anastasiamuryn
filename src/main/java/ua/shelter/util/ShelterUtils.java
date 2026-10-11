@@ -4,7 +4,8 @@ import ua.shelter.model.Animal;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.time.temporal.ChronoUnit;
-import java.util.Set;
+import ua.shelter.model.HealthStatus;
+import ua.shelter.model.DietStatus;
 
 public final class ShelterUtils {
          private ShelterUtils() {
@@ -12,6 +13,11 @@ public final class ShelterUtils {
 
          public static void validateAnimal(Object obj) {
                   String message = "Animal must be not blank, got: " + obj;
+                  ValidationHelper.requireNotNull(obj, message);
+         }
+
+         public static void validateAnimalHealth(Object obj) {
+                  String message = "Animal health must be not blank, got: " + obj;
                   ValidationHelper.requireNotNull(obj, message);
          }
 

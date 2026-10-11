@@ -23,7 +23,7 @@ public class CareSchedule extends BaseEntity {
                   this.animal = animal;
                   ShelterUtils.validateKeeper(keeper);
                   this.keeper = keeper;
-                  ShelterUtils.validateStartDate(startDate, animal.getBirthDate(), keeper. getHireDate());
+                  ShelterUtils.validateStartDate(startDate, animal.getBirthDate(), keeper. hireDate());
                   this.startDate = startDate;
                   setEndDate(endDate);
                   setFeedingsPerDay(feedingsPerDay);

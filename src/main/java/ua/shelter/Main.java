@@ -5,6 +5,9 @@ import ua.shelter.model.Species;
 import ua.shelter.model.CareSchedule;
 import ua.shelter.util.ShelterUtils;
 import java.time.LocalDate;
+import ua.shelter.model.HealthStatus;
+import ua.shelter.model.DietStatus;
+
 
 public class Main{
          public static void main(String[] args){
@@ -43,13 +46,13 @@ public class Main{
                            System.out.println("Caught expected error: " + e.getMessage());
                   }
 
-                  System.out.println("Опис здоров'я тварини: " + ShelterUtils.getHealthDescription(animal.getHealth()));
-                  System.out.println("Опис дієти виду: " + ShelterUtils.getDietDescription(species.diet()));
+                  System.out.println("Здоров'я тварини" + ShelterUtils.getHealthDescription(animal.getHealth()));
+                  System.out.println("Харчування даного виду" + ShelterUtils.getDietDescription(species.diet()));
 
                   try {
                            Species badSpecies = new Species("", "", DietStatus.CARNIVORE);
-                  } catch (IllegalArgumentException e) {
-                  System.out.println("Record validation caught expected error: " + e.getMessage());
+                  } catch (Exception e) {
+                           System.out.println("Record validation caught expected error: " + e.getMessage());
                   }
 
                   Animal animalTwin = Animal.of("DFV46FH", "Bob", species, LocalDate.of(2016, 5, 23), HealthStatus.HEALTHY);
