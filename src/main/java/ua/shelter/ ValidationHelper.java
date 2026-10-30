@@ -63,5 +63,5 @@ final class ValidationHelper {
                            throw new IllegalArgumentException(message);
                   }
          }
-
 }
+
