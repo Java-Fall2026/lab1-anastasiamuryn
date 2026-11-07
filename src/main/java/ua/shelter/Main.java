@@ -1,73 +1,42 @@
 package ua.shelter;
 import ua.shelter.model.Animal;
-import ua.shelter.model.Keeper;
 import ua.shelter.model.Species;
-import ua.shelter.model.CareSchedule;
-import ua.shelter.util.ShelterUtils;
+import ua.shelter.util.ShelterReader;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main{
          public static void main(String[] args){
-                  Species species= new Species("TYTYG5gg", "dog", "CARNIVORE"); 
-                  System.out.println("Species: " + species);
-                  Keeper keeper = new Keeper("Gor", "Gor Ruber", LocalDate.of(2010, 7, 23));
-                  System.out.println("Keeper: " + keeper);
-                  Animal animal= Animal.of("DFV46FH", "Bob", species , LocalDate.of(2016, 5, 23), "HEALTHY");
-                  System.out.println("Animal: " + animal);
-                  CareSchedule schedule = CareSchedule.of(animal, keeper, LocalDate.of(2018, 5, 23), null, 3);
-                  System.out.println("CareSchedule: " + schedule);
-                  String rawChip = "  dfv46fh ";
-                  String normalizedChip = ShelterUtils.validateAndNormalizeChipNumber(rawChip);
-                  System.out.println("Raw: '" + rawChip + "' -> Normalized: '" + normalizedChip + "'");
-
-                  try{
-                  ShelterUtils.dietIsAllow("PIZZA");
-                  } catch (IllegalArgumentException e) {
-                           System.out.println("Caught expected error: " + e.getMessage());
-                  }
-         
-                  try {
-                           ShelterUtils.validateFeedings(10);
-                  } catch (IllegalArgumentException e) {
-                           System.out.println("Caught expected error: " + e.getMessage());
-                  }
 
                   try {
-                           ShelterUtils.validateBirtheDate(LocalDate.now().plusDays(5));
-                  } catch (IllegalArgumentException e) {
-                           System.out.println("Caught expected error: " + e.getMessage());
+                           java.nio.file.Path tempMixedFile = java.nio.file.Path.of("data/mixed_test.csv");
+                           java.nio.file.Files.writeString(tempMixedFile, "speciesCode,commonName,diet\nDOG001,Dog,CARNIVORE\nBAD_ROW_WITHOUT_PROPER_DATA");
+                           ShelterReader.loadSpecies(tempMixedFile.toString());
+                  } catch (Exception e) {
+                           System.out.println("Помилка: " + e.getMessage());
                   }
+                  System.out.println();
 
-                  try {
-                           animal.setHealth("INVALID_HEALTH");
-                  } catch (IllegalArgumentException e) {
-                           System.out.println("Setter protection triggered: " + e.getMessage());
-                  }
-
-                  Animal animalTwin = Animal.of("DFV46FH", "Bob", species, LocalDate.of(2016, 5, 23), "HEALTHY");
-                  Animal animalDifferent = Animal.of("DFV99999", "Max", species, LocalDate.of(2020, 1, 1), "HEALTHY");
-
-                  System.out.println("animal == animalTwin: " + (animal == animalTwin)); 
-                  System.out.println("animal.equals(animalTwin): " + animal.equals(animalTwin)); 
-                  System.out.println("HashCode match: " + (animal.hashCode() == animalTwin.hashCode())); 
-                  System.out.println("animal.equals(animalDifferent): " + animal.equals(animalDifferent)); 
-
-                  long ageMonths = ShelterUtils.animalAgeMonths(animal);
-                  System.out.println("Animal age in months: " + ageMonths);
-
-                  long careDays = ShelterUtils.careDays(schedule);
-                  System.out.println("Care active days: " + careDays);
-
-                  System.out.println(species);
-                  System.out.println(keeper);
-                  System.out.println(animal);
-                  System.out.println(schedule);
-
+                  List<Species> emptyResult = ShelterReader.loadSpecies("data/non_existent.csv");
+                  System.out.println("Результат (очікується порожній список): " + emptyResult.size());
                   
-                  /* he following line does not compile because ValidationHelper or its methods 
-                  have package-private visibility and cannot be accessed from outside the util package
-                  ua.shelter.util.ValidationHelper.requireNotNull(null, "test");
-                  */
+                  List<Species> speciesList = ShelterReader.loadSpecies("data/species.csv");
+                  System.out.println("Успішно завантажено видів: " + speciesList.size());
+                  for (Species s : speciesList) {
+                           System.out.println("   [LOADED] " + s);
+                  }
+
+                  if (!speciesList.isEmpty()) {
+                           Species sampleSpecies = speciesList.get(0);
+                           Animal animal = Animal.of("CHIP123", "Барсік", sampleSpecies, LocalDate.of(2020, 1, 1), "HEALTHY");
+                           System.out.println("Початковий об'єкт тварини: " + animal);
+                           try {
+                                    System.out.println("Спроба передати некоректне значення у метод setHealth()...");
+                                    animal.setHealth("BAD_HEALTH_STATUS");
+                           } catch (IllegalArgumentException e) {
+                                    System.out.println("Перехоплено очікуваний виняток від сеттера: " + e.getMessage());
+                           }
+                  }
          }
 }
 
