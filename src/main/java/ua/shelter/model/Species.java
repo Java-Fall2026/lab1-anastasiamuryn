@@ -11,7 +11,7 @@ public class Species extends BaseEntity {
          public Species(String speciesCode, String commonName, String diet) {
                   super();
                   ShelterUtils.validateSpecies(speciesCode);
-                  this.speciesCode = speciesCode;
+                  this.speciesCode = ShelterUtils.validateAndNormalizeSpeciesCode(speciesCode);
                   this.commonName = ShelterUtils.validateAndCapitalizeCommonName(commonName);
                   this.diet = ShelterUtils.dietIsAllow(diet);
          }

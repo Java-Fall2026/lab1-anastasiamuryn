@@ -1,42 +1,102 @@
 package ua.shelter;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ua.shelter.exception.DuplicateIdentityException;
 import ua.shelter.model.Animal;
+import ua.shelter.model.Keeper;
 import ua.shelter.model.Species;
+import ua.shelter.repository.GenericRepository;
 import ua.shelter.util.ShelterReader;
+
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
-public class Main{
-         public static void main(String[] args){
+public class Main {
 
-                  try {
-                           java.nio.file.Path tempMixedFile = java.nio.file.Path.of("data/mixed_test.csv");
-                           java.nio.file.Files.writeString(tempMixedFile, "speciesCode,commonName,diet\nDOG001,Dog,CARNIVORE\nBAD_ROW_WITHOUT_PROPER_DATA");
-                           ShelterReader.loadSpecies(tempMixedFile.toString());
-                  } catch (Exception e) {
-                           System.out.println("Помилка: " + e.getMessage());
-                  }
-                  System.out.println();
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
 
-                  List<Species> emptyResult = ShelterReader.loadSpecies("data/non_existent.csv");
-                  System.out.println("Результат (очікується порожній список): " + emptyResult.size());
-                  
-                  List<Species> speciesList = ShelterReader.loadSpecies("data/species.csv");
-                  System.out.println("Успішно завантажено видів: " + speciesList.size());
-                  for (Species s : speciesList) {
-                           System.out.println("   [LOADED] " + s);
-                  }
+    public static void main(String[] args) {
+        // ===== 1. Three repositories of different types =====
+        System.out.println("=== 1. Три репозиторії різних типів ===");
+        GenericRepository<Species> speciesRepo = new GenericRepository<>("species", s -> s.getSpeciesCode());
+        GenericRepository<Animal> animalRepo = new GenericRepository<>("animals", a -> a.getChipNumber());
+        GenericRepository<Keeper> keeperRepo = new GenericRepository<>("keepers", k -> k.employeeBadge());
 
-                  if (!speciesList.isEmpty()) {
-                           Species sampleSpecies = speciesList.get(0);
-                           Animal animal = Animal.of("CHIP123", "Барсік", sampleSpecies, LocalDate.of(2020, 1, 1), "HEALTHY");
-                           System.out.println("Початковий об'єкт тварини: " + animal);
-                           try {
-                                    System.out.println("Спроба передати некоректне значення у метод setHealth()...");
-                                    animal.setHealth("BAD_HEALTH_STATUS");
-                           } catch (IllegalArgumentException e) {
-                                    System.out.println("Перехоплено очікуваний виняток від сеттера: " + e.getMessage());
-                           }
-                  }
-         }
+        Species dog = new Species("DOG001", "Dog", "CARNIVORE");
+        Species cat = new Species("CAT002", "Cat", "CARNIVORE");
+        speciesRepo.addAll(List.of(dog, cat));
+
+        Animal bob = Animal.of("DFV46FH", "Bob", dog, LocalDate.of(2016, 5, 23), "HEALTHY");
+        animalRepo.add(bob);
+        keeperRepo.add(new Keeper("K100", "Gor Ruber", LocalDate.of(2010, 7, 23)));
+
+        lookup(speciesRepo, "DOG001");   // found
+        lookup(speciesRepo, "ZZZ999");   // not found
+        lookup(animalRepo, "DFV46FH");   // found
+        lookup(animalRepo, "NOPE");      // not found
+        lookup(keeperRepo, "K100");      // found
+        lookup(keeperRepo, "K999");      // not found
+
+        // ===== 2. Fill a repository from the LR3 CSV file =====
+        System.out.println("\n=== 2. Наповнення репозиторію з CSV ===");
+        GenericRepository<Species> csvSpecies = new GenericRepository<>("csv-species", s -> s.getSpeciesCode());
+        int rejected = 0;
+        for (Species s : ShelterReader.loadSpecies("data/species.csv")) {
+            try {
+                csvSpecies.add(s);
+            } catch (DuplicateIdentityException e) {
+                rejected++;
+                System.out.println("Дублікат з CSV пропущено: " + e.getMessage());
+            }
+        }
+        System.out.println("У репозиторії видів з CSV: " + csvSpecies.size() + ", відхилено дублікатів: " + rejected);
+        printAll("Усі види з CSV", csvSpecies.findAll());
+
+        // ===== 3. Duplicate: add vs addIfAbsent =====
+        System.out.println("\n=== 3. Дублікат: add та addIfAbsent ===");
+        Animal bobTwin = Animal.of("DFV46FH", "Bobby", dog, LocalDate.of(2016, 5, 23), "HEALTHY");
+        try {
+            animalRepo.add(bobTwin);
+        } catch (DuplicateIdentityException e) {
+            System.out.println("add: перехоплено виняток -> " + e.getMessage());
+        }
+        boolean added = animalRepo.addIfAbsent(bobTwin);
+        System.out.println("addIfAbsent: повернув " + added + ", розмір репозиторію: " + animalRepo.size());
+
+        // ===== 4. Removal =====
+        System.out.println("\n=== 4. Видалення ===");
+        System.out.println("Видалення наявного (K100): " + keeperRepo.removeByIdentity("K100"));
+        System.out.println("Видалення відсутнього (K999): " + keeperRepo.removeByIdentity("K999"));
+
+        // ===== 5. Logging: INFO / WARN / ERROR =====
+        System.out.println("\n=== 5. Логування: ERROR ===");
+        try {
+            animalRepo.add(null);
+        } catch (IllegalArgumentException e) {
+            System.out.println("add(null): перехоплено виняток -> " + e.getMessage());
+        }
+        System.out.println("(INFO -- успішні операції, WARN -- дублікати та ненайдене, ERROR -- null; див. лог вище)");
+    }
+
+    /** Prints the lookup result; the caller logs WARN on a miss because the repository stays silent there. */
+    private static <T> void lookup(GenericRepository<T> repo, String identity) {
+        Optional<T> found = repo.findByIdentity(identity);
+        if (found.isPresent()) {
+            System.out.println("Знайдено [" + identity + "]: " + found.get());
+        } else {
+            log.warn("Element '{}' not found", identity);
+            System.out.println("Не знайдено [" + identity + "]");
+        }
+    }
+
+    /** Wildcard parameter: we only read from the collection and do not care about the element type. */
+       private static <T> void printAll(String title, Collection<? extends T> items) {
+        System.out.println(title + " (" + items.size() + "):");
+        for (T item : items) {
+            System.out.println("  " + item);
+        }
+    }
 }
-
