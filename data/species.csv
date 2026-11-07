@@ -10,6 +10,8 @@ FOX008,Fox,CARNIVORE
 WLF009,Wolf,CARNIVORE
 SFP010,Sheep,HERBIVORE
 #uncorect
+dog001,Doggy,CARNIVORE
+#uncorect
 LION009,Lion
 #uncorect
 ZEB010,Zebra,DIET

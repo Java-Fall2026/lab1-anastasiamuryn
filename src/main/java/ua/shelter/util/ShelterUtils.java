@@ -38,6 +38,11 @@ public final class ShelterUtils {
                   return FormatHelper.normalize(value, message);
          }
 
+         public static String validateAndNormalizeSpeciesCode(String value) {
+                  String message = "Species code must be not blank, got: " + value;
+                  return FormatHelper.normalize(value, message);
+         }
+
          public static String validateAndCapitalizeCommonName(String value) {
                   String message = "Common name must be not blank, got: " + value;
                   return FormatHelper.capitalize(value, message);

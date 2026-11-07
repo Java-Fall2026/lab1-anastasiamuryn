@@ -14,8 +14,8 @@ final class ValidationHelper {
          }
 
          public static void requireNotBlank(String val, String message) {
-                  if (val == null || val.trim().isBlank()) {
-                           throw new NullPointerException(message);
+                  if (val == null || val.isBlank()) {
+                           throw new IllegalArgumentException(message);
                   }
          }
 
@@ -64,4 +64,3 @@ final class ValidationHelper {
                   }
          }
 }
-
