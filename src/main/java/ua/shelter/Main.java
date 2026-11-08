@@ -19,7 +19,6 @@ public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-        // ===== 1. Three repositories of different types =====
         System.out.println("=== 1. Три репозиторії різних типів ===");
         GenericRepository<Species> speciesRepo = new GenericRepository<>("species", s -> s.getSpeciesCode());
         GenericRepository<Animal> animalRepo = new GenericRepository<>("animals", a -> a.getChipNumber());
@@ -33,14 +32,13 @@ public class Main {
         animalRepo.add(bob);
         keeperRepo.add(new Keeper("K100", "Gor Ruber", LocalDate.of(2010, 7, 23)));
 
-        lookup(speciesRepo, "DOG001");   // found
-        lookup(speciesRepo, "ZZZ999");   // not found
-        lookup(animalRepo, "DFV46FH");   // found
-        lookup(animalRepo, "NOPE");      // not found
-        lookup(keeperRepo, "K100");      // found
-        lookup(keeperRepo, "K999");      // not found
+        lookup(speciesRepo, "DOG001");   
+        lookup(speciesRepo, "ZZZ999");   
+        lookup(animalRepo, "DFV46FH");   
+        lookup(animalRepo, "NOPE");      
+        lookup(keeperRepo, "K100");      
+        lookup(keeperRepo, "K999");      
 
-        // ===== 2. Fill a repository from the LR3 CSV file =====
         System.out.println("\n=== 2. Наповнення репозиторію з CSV ===");
         GenericRepository<Species> csvSpecies = new GenericRepository<>("csv-species", s -> s.getSpeciesCode());
         int rejected = 0;
@@ -55,7 +53,6 @@ public class Main {
         System.out.println("У репозиторії видів з CSV: " + csvSpecies.size() + ", відхилено дублікатів: " + rejected);
         printAll("Усі види з CSV", csvSpecies.findAll());
 
-        // ===== 3. Duplicate: add vs addIfAbsent =====
         System.out.println("\n=== 3. Дублікат: add та addIfAbsent ===");
         Animal bobTwin = Animal.of("DFV46FH", "Bobby", dog, LocalDate.of(2016, 5, 23), "HEALTHY");
         try {
@@ -66,12 +63,10 @@ public class Main {
         boolean added = animalRepo.addIfAbsent(bobTwin);
         System.out.println("addIfAbsent: повернув " + added + ", розмір репозиторію: " + animalRepo.size());
 
-        // ===== 4. Removal =====
         System.out.println("\n=== 4. Видалення ===");
         System.out.println("Видалення наявного (K100): " + keeperRepo.removeByIdentity("K100"));
         System.out.println("Видалення відсутнього (K999): " + keeperRepo.removeByIdentity("K999"));
 
-        // ===== 5. Logging: INFO / WARN / ERROR =====
         System.out.println("\n=== 5. Логування: ERROR ===");
         try {
             animalRepo.add(null);
@@ -81,7 +76,6 @@ public class Main {
         System.out.println("(INFO -- успішні операції, WARN -- дублікати та ненайдене, ERROR -- null; див. лог вище)");
     }
 
-    /** Prints the lookup result; the caller logs WARN on a miss because the repository stays silent there. */
     private static <T> void lookup(GenericRepository<T> repo, String identity) {
         Optional<T> found = repo.findByIdentity(identity);
         if (found.isPresent()) {
@@ -92,7 +86,6 @@ public class Main {
         }
     }
 
-    /** Wildcard parameter: we only read from the collection and do not care about the element type. */
        private static <T> void printAll(String title, Collection<? extends T> items) {
         System.out.println(title + " (" + items.size() + "):");
         for (T item : items) {
