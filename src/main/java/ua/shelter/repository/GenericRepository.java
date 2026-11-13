@@ -5,11 +5,13 @@ import org.slf4j.LoggerFactory;
 import ua.shelter.exception.DuplicateIdentityException;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class GenericRepository<T> {
 
@@ -73,6 +75,33 @@ public class GenericRepository<T> {
 
     public int size() {
         return items.size();
+    }
+
+    public List<T> findAllSorted(Comparator<T> comparator) {
+        return findAllSorted("custom comparator", comparator);
+    }
+
+    public List<T> findAllSorted(String criterion, Comparator<T> comparator) {
+        Objects.requireNonNull(comparator, "Comparator must not be null");
+        List<T> result = items.values().stream()
+                .sorted(comparator)
+                .toList();
+        log.info("[{}] sorted by {}, returned: {}", name, criterion, result.size());
+        return result;
+    }
+
+    public List<T> findAllSortedByIdentity(SortOrder order) {
+        Objects.requireNonNull(order, "Sort order must not be null");
+        List<T> result = items.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey(order.identityComparator()))
+                .map(Map.Entry::getValue)
+                .toList();
+        log.info("[{}] sorted by identity {}, returned: {}", name, order, result.size());
+        return result;
+    }
+
+    public Stream<T> stream() {
+        return items.values().stream();
     }
 
     private String put(T item) {
