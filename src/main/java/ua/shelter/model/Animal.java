@@ -1,82 +1,94 @@
 package ua.shelter.model;
+
 import ua.common.BaseEntity;
-import java.util.Objects;
 import ua.shelter.util.ShelterUtils;
+
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.Objects;
 
-public class Animal extends BaseEntity {
-         private String chipNumber;
-         private String nickname;
-         private Species species;
-         private LocalDate birthDate;
-         private String health;
+public class Animal extends BaseEntity implements Comparable<Animal> {
 
-         public static Animal of(String chipNumber, String nickname, Species species, LocalDate birthDate,
-                           String health) {
-                  return new Animal(chipNumber, nickname, species, birthDate, health);
-         }
+    private static final Comparator<Animal> NATURAL_ORDER =
+            Comparator.comparing(Animal::getNickname)
+                    .thenComparing(Animal::getChipNumber);
 
-         private Animal(String chipNumber, String nickname, Species species, LocalDate birthDate, String health) {
-                  super();
-                  this.chipNumber = ShelterUtils.validateAndNormalizeChipNumber(chipNumber);
-                  this.nickname = ShelterUtils.validateAndCapitalizeNickName(nickname);
-                  ShelterUtils.validateSpecies(species);
-                  this.species = species;
-                  ShelterUtils.validateBirtheDate(birthDate);
-                  this.birthDate = birthDate;
-                  setHealth(health);
-         }
+    private String chipNumber;
+    private String nickname;
+    private Species species;
+    private LocalDate birthDate;
+    private String health;
 
-         public String getChipNumber() {
-                  return chipNumber;
-         }
+    public static Animal of(String chipNumber, String nickname, Species species, LocalDate birthDate,
+                            String health) {
+        return new Animal(chipNumber, nickname, species, birthDate, health);
+    }
 
-         public String getNickname() {
-                  return nickname;
-         }
+    private Animal(String chipNumber, String nickname, Species species, LocalDate birthDate, String health) {
+        super();
+        this.chipNumber = ShelterUtils.validateAndNormalizeChipNumber(chipNumber);
+        this.nickname = ShelterUtils.validateAndCapitalizeNickName(nickname);
+        ShelterUtils.validateSpecies(species);
+        this.species = species;
+        ShelterUtils.validateBirtheDate(birthDate);
+        this.birthDate = birthDate;
+        setHealth(health);
+    }
 
-         public Species getSpecies() {
-                  return species;
-         }
+    public String getChipNumber() {
+        return chipNumber;
+    }
 
-         public LocalDate getBirthDate() {
-                  return birthDate;
-         }
+    public String getNickname() {
+        return nickname;
+    }
 
-         public String getHealth() {
-                  return health;
-         }
+    public Species getSpecies() {
+        return species;
+    }
 
-         public final void setHealth(String health) {
-                  this.health = ShelterUtils.healthIsAllow(health);
-         }
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
 
-         @Override
-         public boolean equals(Object o){
-                  if(this==o){
-                           return true;
-                  }
-                  if(o==null || getClass()!=o.getClass()){
-                           return false;
-                  }
-                  Animal animal = (Animal)o;
-                  return Objects.equals(chipNumber, animal.chipNumber);
-         }
+    public String getHealth() {
+        return health;
+    }
 
-         @Override
-         public int hashCode(){
-                  return Objects.hash(chipNumber);
-         }
+    public final void setHealth(String health) {
+        this.health = ShelterUtils.healthIsAllow(health);
+    }
 
-         @Override
-         public String toString(){
-                  return "Animal{" + 
-                  "chipNumber : " + chipNumber + '\'' +
-                  ", nickname: " + nickname + '\'' +
-                  ", species : " + species + '\'' +
-                  ", birthDate : " + birthDate + '\'' +
-                  ", health : " + health + '\'' +
-                  '}';
-         }
+    @Override
+    public int compareTo(Animal other) {
+        return NATURAL_ORDER.compare(this, other);
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Animal animal = (Animal) o;
+        return Objects.equals(chipNumber, animal.chipNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(chipNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "chipNumber : " + chipNumber + '\'' +
+                ", nickname: " + nickname + '\'' +
+                ", species : " + species + '\'' +
+                ", birthDate : " + birthDate + '\'' +
+                ", health : " + health + '\'' +
+                '}';
+    }
 }
