@@ -1,0 +1,113 @@
+- animal: {chipNumber: CHIP001, nickname: Bob, species: {speciesCode: DOG001, commonName: Dog, diet: CARNIVORE}, birthDate: "2016-05-23", health: HEALTHY}
+  keeper: {employeeBadge: K100, fullName: "Ivan Petrenko", hireDate: "2015-03-10"}
+  startDate: "2020-01-10"
+  endDate: null
+  feedingsPerDay: 3
+
+- animal: {chipNumber: CHIP002, nickname: Rex, species: {speciesCode: DOG001, commonName: Dog, diet: CARNIVORE}, birthDate: "2019-02-14", health: UNDER_TREATMENT}
+  keeper: {employeeBadge: K100, fullName: "Ivan Petrenko", hireDate: "2015-03-10"}
+  startDate: "2021-03-01"
+  endDate: "2024-03-01"
+  feedingsPerDay: 2
+
+- animal: {chipNumber: CHIP003, nickname: Misty, species: {speciesCode: CAT002, commonName: Cat, diet: CARNIVORE}, birthDate: "2021-07-01", health: HEALTHY}
+  keeper: {employeeBadge: K200, fullName: "Olena Shevchenko", hireDate: "2018-09-01"}
+  startDate: "2022-05-15"
+  endDate: null
+  feedingsPerDay: 4
+
+- animal: {chipNumber: CHIP004, nickname: Bob, species: {speciesCode: CAT002, commonName: Cat, diet: CARNIVORE}, birthDate: "2022-11-30", health: QUARANTINE}
+  keeper: {employeeBadge: K200, fullName: "Olena Shevchenko", hireDate: "2018-09-01"}
+  startDate: "2023-01-20"
+  endDate: "2023-12-31"
+  feedingsPerDay: 3
+
+- animal: {chipNumber: CHIP005, nickname: Luna, species: {speciesCode: RAB003, commonName: Rabbit, diet: HERBIVORE}, birthDate: "2023-04-12", health: HEALTHY}
+  keeper: {employeeBadge: K200, fullName: "Olena Shevchenko", hireDate: "2018-09-01"}
+  startDate: "2023-06-01"
+  endDate: "2025-06-01"
+  feedingsPerDay: 5
+
+- animal: {chipNumber: CHIP006, nickname: Max, species: {speciesCode: DOG001, commonName: Dog, diet: CARNIVORE}, birthDate: "2018-09-09", health: HEALTHY}
+  keeper: {employeeBadge: K300, fullName: "Andriy Koval", hireDate: "2019-05-20"}
+  startDate: "2019-06-01"
+  endDate: null
+  feedingsPerDay: 2
+
+- animal: {chipNumber: CHIP007, nickname: Tom, species: {speciesCode: CAT002, commonName: Cat, diet: CARNIVORE}, birthDate: "2020-03-17", health: UNDER_TREATMENT}
+  keeper: {employeeBadge: K300, fullName: "Andriy Koval", hireDate: "2019-05-20"}
+  startDate: "2020-04-01"
+  endDate: "2022-04-01"
+  feedingsPerDay: 3
+
+- animal: {chipNumber: CHIP008, nickname: Daisy, species: {speciesCode: RAB003, commonName: Rabbit, diet: HERBIVORE}, birthDate: "2022-06-21", health: HEALTHY}
+  keeper: {employeeBadge: K400, fullName: "Maria Bondar", hireDate: "2021-02-01"}
+  startDate: "2022-07-01"
+  endDate: null
+  feedingsPerDay: 6
+
+- animal: {chipNumber: CHIP009, nickname: Buddy, species: {speciesCode: DOG001, commonName: Dog, diet: CARNIVORE}, birthDate: "2024-01-15", health: QUARANTINE}
+  keeper: {employeeBadge: K400, fullName: "Maria Bondar", hireDate: "2021-02-01"}
+  startDate: "2024-02-01"
+  endDate: "2025-02-01"
+  feedingsPerDay: 4
+
+- animal: {chipNumber: CHIP010, nickname: Whiskers, species: {speciesCode: CAT002, commonName: Cat, diet: CARNIVORE}, birthDate: "2017-12-05", health: HEALTHY}
+  keeper: {employeeBadge: K100, fullName: "Ivan Petrenko", hireDate: "2015-03-10"}
+  startDate: "2018-01-15"
+  endDate: "2023-01-15"
+  feedingsPerDay: 1
+
+- animal: {chipNumber: CHIP011, nickname: Snowy, species: {speciesCode: RAB003, commonName: Rabbit, diet: HERBIVORE}, birthDate: "2021-02-28", health: UNDER_TREATMENT}
+  keeper: {employeeBadge: K400, fullName: "Maria Bondar", hireDate: "2021-02-01"}
+  startDate: "2021-03-15"
+  endDate: null
+  feedingsPerDay: 2
+
+- animal: {chipNumber: CHIP012, nickname: Charlie, species: {speciesCode: DOG001, commonName: Dog, diet: CARNIVORE}, birthDate: "2015-08-30", health: HEALTHY}
+  keeper: {employeeBadge: K300, fullName: "Andriy Koval", hireDate: "2019-05-20"}
+  startDate: "2019-05-20"
+  endDate: "2021-05-20"
+  feedingsPerDay: 3
+
+- animal: {chipNumber: CHIP001, nickname: Bob, species: {speciesCode: DOG001, commonName: Dog, diet: CARNIVORE}, birthDate: "2016-05-23", health: HEALTHY}
+  keeper: {employeeBadge: K300, fullName: "Andriy Koval", hireDate: "2019-05-20"}
+  startDate: "2019-06-01"
+  endDate: "2019-12-31"
+  feedingsPerDay: 2
+
+- animal: {chipNumber: CHIP003, nickname: Misty, species: {speciesCode: CAT002, commonName: Cat, diet: CARNIVORE}, birthDate: "2021-07-01", health: HEALTHY}
+  keeper: {employeeBadge: K100, fullName: "Ivan Petrenko", hireDate: "2015-03-10"}
+  startDate: "2023-02-01"
+  endDate: null
+  feedingsPerDay: 3
+
+- animal: {chipNumber: CHIP006, nickname: Max, species: {speciesCode: DOG001, commonName: Dog, diet: CARNIVORE}, birthDate: "2018-09-09", health: HEALTHY}
+  keeper: {employeeBadge: K100, fullName: "Ivan Petrenko", hireDate: "2015-03-10"}
+  startDate: "2023-03-01"
+  endDate: null
+  feedingsPerDay: 9
+
+- animal: {chipNumber: CHIP002, nickname: Rex, species: {speciesCode: DOG001, commonName: Dog, diet: CARNIVORE}, birthDate: "2019-02-14", health: UNDER_TREATMENT}
+  keeper: {employeeBadge: K200, fullName: "Olena Shevchenko", hireDate: "2018-09-01"}
+  startDate: "2022-06-01"
+  endDate: "2022-01-01"
+  feedingsPerDay: 2
+
+- animal: {chipNumber: CHIP008, nickname: Daisy, species: {speciesCode: RAB003, commonName: Rabbit, diet: HERBIVORE}, birthDate: "2022-06-21", health: HEALTHY}
+  keeper: {employeeBadge: K500, fullName: "", hireDate: "2020-01-01"}
+  startDate: "2022-09-01"
+  endDate: null
+  feedingsPerDay: 3
+
+- animal: null
+  keeper: {employeeBadge: K100, fullName: "Ivan Petrenko", hireDate: "2015-03-10"}
+  startDate: "2022-10-01"
+  endDate: null
+  feedingsPerDay: 2
+
+- animal: {chipNumber: CHIP001, nickname: Bob, species: {speciesCode: DOG001, commonName: Dog, diet: CARNIVORE}, birthDate: "2016-05-23", health: HEALTHY}
+  keeper: {employeeBadge: K200, fullName: "Olena Shevchenko", hireDate: "2018-09-01"}
+  startDate: "2020-01-10"
+  endDate: null
+  feedingsPerDay: 5

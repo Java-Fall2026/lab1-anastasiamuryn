@@ -1,0 +1,15 @@
+[
+  {
+    "chipNumber": "CHIP101",
+    "nickname": "Rusty",
+    "species": { "speciesCode": "DOG001", "commonName": "Dog", "diet": "CARNIVORE" },
+    "birthDate": "2020-04-04",
+    "health": "HEALTHY"
+  },
+  {
+    "chipNumber": "CHIP102",
+    "nickname": "Pearl"
+    "species": { "speciesCode": "CAT002", "commonName": "Cat", "diet": "CARNIVORE" },
+    "birthDate": "2021-01-01",
+    "health": "HEALTHY"
+]

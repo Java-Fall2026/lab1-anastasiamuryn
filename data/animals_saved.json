@@ -1,0 +1,131 @@
+[ {
+  "chipNumber" : "CHIP001",
+  "nickname" : "Bob",
+  "species" : {
+    "speciesCode" : "DOG001",
+    "commonName" : "Dog",
+    "diet" : "CARNIVORE"
+  },
+  "birthDate" : "2016-05-23",
+  "health" : "QUARANTINE"
+}, {
+  "chipNumber" : "CHIP003",
+  "nickname" : "Misty",
+  "species" : {
+    "speciesCode" : "CAT002",
+    "commonName" : "Cat",
+    "diet" : "CARNIVORE"
+  },
+  "birthDate" : "2021-07-01",
+  "health" : "HEALTHY"
+}, {
+  "chipNumber" : "CHIP004",
+  "nickname" : "Bob",
+  "species" : {
+    "speciesCode" : "CAT002",
+    "commonName" : "Cat",
+    "diet" : "CARNIVORE"
+  },
+  "birthDate" : "2022-11-30",
+  "health" : "QUARANTINE"
+}, {
+  "chipNumber" : "CHIP005",
+  "nickname" : "Luna",
+  "species" : {
+    "speciesCode" : "RAB003",
+    "commonName" : "Rabbit",
+    "diet" : "HERBIVORE"
+  },
+  "birthDate" : "2023-04-12",
+  "health" : "HEALTHY"
+}, {
+  "chipNumber" : "CHIP006",
+  "nickname" : "Max",
+  "species" : {
+    "speciesCode" : "DOG001",
+    "commonName" : "Dog",
+    "diet" : "CARNIVORE"
+  },
+  "birthDate" : "2018-09-09",
+  "health" : "HEALTHY"
+}, {
+  "chipNumber" : "CHIP007",
+  "nickname" : "Tom",
+  "species" : {
+    "speciesCode" : "CAT002",
+    "commonName" : "Cat",
+    "diet" : "CARNIVORE"
+  },
+  "birthDate" : "2020-03-17",
+  "health" : "UNDER_TREATMENT"
+}, {
+  "chipNumber" : "CHIP008",
+  "nickname" : "Daisy",
+  "species" : {
+    "speciesCode" : "RAB003",
+    "commonName" : "Rabbit",
+    "diet" : "HERBIVORE"
+  },
+  "birthDate" : "2022-06-21",
+  "health" : "HEALTHY"
+}, {
+  "chipNumber" : "CHIP009",
+  "nickname" : "Buddy",
+  "species" : {
+    "speciesCode" : "DOG001",
+    "commonName" : "Dog",
+    "diet" : "CARNIVORE"
+  },
+  "birthDate" : "2024-01-15",
+  "health" : "QUARANTINE"
+}, {
+  "chipNumber" : "CHIP010",
+  "nickname" : "Whiskers",
+  "species" : {
+    "speciesCode" : "CAT002",
+    "commonName" : "Cat",
+    "diet" : "CARNIVORE"
+  },
+  "birthDate" : "2017-12-05",
+  "health" : "HEALTHY"
+}, {
+  "chipNumber" : "CHIP011",
+  "nickname" : "Snowy",
+  "species" : {
+    "speciesCode" : "RAB003",
+    "commonName" : "Rabbit",
+    "diet" : "HERBIVORE"
+  },
+  "birthDate" : "2021-02-28",
+  "health" : "UNDER_TREATMENT"
+}, {
+  "chipNumber" : "CHIP012",
+  "nickname" : "Charlie",
+  "species" : {
+    "speciesCode" : "DOG001",
+    "commonName" : "Dog",
+    "diet" : "CARNIVORE"
+  },
+  "birthDate" : "2015-08-30",
+  "health" : "HEALTHY"
+}, {
+  "chipNumber" : "CHIP013",
+  "nickname" : "Bella",
+  "species" : {
+    "speciesCode" : "CAT002",
+    "commonName" : "Cat",
+    "diet" : "CARNIVORE"
+  },
+  "birthDate" : "2023-10-10",
+  "health" : "HEALTHY"
+}, {
+  "chipNumber" : "CHIP100",
+  "nickname" : "Zeus",
+  "species" : {
+    "speciesCode" : "DOG001",
+    "commonName" : "Dog",
+    "diet" : "CARNIVORE"
+  },
+  "birthDate" : "2025-03-03",
+  "health" : "HEALTHY"
+} ]
